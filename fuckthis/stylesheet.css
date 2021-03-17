@@ -1,0 +1,14 @@
+.open-button{
+    background-color: darkgray;
+    
+}
+.form-popup{
+    display: none;
+    border: 10px;
+}
+.form-container{
+    background-color: deepskyblue;
+    width: 30%;
+    border: 10px;
+    border-color: black;
+}
