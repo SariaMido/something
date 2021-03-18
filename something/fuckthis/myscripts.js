@@ -20,5 +20,6 @@ window.addEventListener("load", function youtube(){
     document.getElementById("container").innerHTML=html;
 })
 function adding(){
-    
+    data.push("something");
+    document.getElementById("container").innerHTML=html;
 }
