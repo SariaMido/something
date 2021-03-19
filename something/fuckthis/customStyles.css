@@ -4,3 +4,7 @@
 .controlForm:hover{
     color:darkcyan;
 }
+
+#AddingYoutuberForm{
+    display: none;
+}

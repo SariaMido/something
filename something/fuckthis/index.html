@@ -27,22 +27,25 @@
                 <div id="tableYoutube"></div>
             </div>
         </div>
-        <div class="row mt-5" id="AddingYoutuberForm" style="display: none;">
+        <div class="row mt-5" id="AddingYoutuberForm">
             <div class="col-md-5">
-                <form name="youtuber" id="youtuber" onsubmit="addYoutuber()">
+                <form name="youtuber" id="youtuber">
                     <div class="form-group">
                         <label for="youtuberName">Name</label>
-                        <input type="text" class="form-control" id="youtuberName" placeholder="Enter name">
+                        <input type="text" class="form-control" name="youtuberName" id="youtuberName"
+                            placeholder="Enter name">
                     </div>
 
                     <div class="form-group">
                         <label for="youtuberSection">Section</label>
-                        <input type="text" class="form-control" id="youtuberSection" placeholder="Enter section">
+                        <input type="text" class="form-control" name="youtuberSection" id="youtuberSection"
+                            placeholder="Enter section">
                     </div>
 
                     <div class="form-group">
                         <label for="youtuberAge">Age</label>
-                        <input type="number" class="form-control" id="youtuberAge" placeholder="Enter age">
+                        <input type="number" class="form-control" name="youtuberAge" id="youtuberAge"
+                            placeholder="Enter age">
                     </div>
                     <button type="submit" class="btn btn-primary mt-2">Submit</button>
                 </form>
