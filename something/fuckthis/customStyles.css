@@ -8,3 +8,14 @@
 #AddingYoutuberForm{
     display: none;
 }
+
+.warningSpans{
+    margin-left:10px;
+    font-size: 12px !important;
+    color:#ff3333;
+    font-style: italic;
+}
+
+.invalidInput{
+     border:1px solid #ff3333; 
+}

@@ -53,23 +53,48 @@ $(function () {
         let sectionInput = $(this).serializeArray()[1].value;
         let ageInput = +$(this).serializeArray()[2].value;
 
+
         let youtuber = { name: nameInput, section: sectionInput, age: ageInput };
 
-        data.push(youtuber);
-        buildTable(youtuber);
+        if (validateInputs(youtuber)) {
+            data.push(youtuber);
+            buildTable(youtuber);
+        } else {
+            console.log('Invalid Form');
+        }
 
     });
 
-    // function addToTable(newItem) {
-    //     let newElement = document.createElement('tr');
-    //     newElement.className = 'newItem';
-    //     newElement.innerHTML = `
-    //     <td>${newItem.name}</td>
-    //     <td>${newItem.section}</td>
-    //     <td>${newItem.age}</td>
-    //     `;
-    //     document.getElementById('youtuberTable').appendChild(newElement);
-    // }
+    function validateInputs(person) {
+        let formIsValid = false;
+
+        if (person.name == '') {
+            let nameInputElement = document.getElementById('youtuberName');
+            displayValidationResults(nameInputElement);
+            formIsValid = false;
+        }
+
+        if (person.section == '') {
+            let nameInputElement = document.getElementById('youtuberSection');
+            displayValidationResults(nameInputElement);
+        }
+
+        if (person.age < 12 || person.age < 60) {
+            let nameInputElement = document.getElementById('youtuberAge');
+            displayValidationResults(nameInputElement);
+        }
+
+    }
+
+    function displayValidationResults(input) {
+        let warningSpan = document.createElement('span');
+        warningSpan.className = 'warningSpans';
+        warningSpan.innerHTML = 'This field is required*';
+        input.classList.add('invalidInput');
+        input.parentNode.append(warningSpan);
+    }
+
+
 
 });
 
