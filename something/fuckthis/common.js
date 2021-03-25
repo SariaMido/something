@@ -26,6 +26,9 @@ $(function () {
             html += `<td>${data[i].name}</td>`;
             html += `<td>${data[i].section}</td>`;
             html += `<td>${data[i].age}</td>`;
+            html +=
+                `<td><i class="fas fa-user-times" style="cursor:pointer"></i></td>`;
+
             html += `</tr><tr>`;
         }
         html += `</tr></table>`;
@@ -59,43 +62,43 @@ $(function () {
         if (validateInputs(youtuber)) {
             data.push(youtuber);
             buildTable(youtuber);
-        } else {
-            console.log('Invalid Form');
+            this.reset();
         }
 
     });
 
     function validateInputs(person) {
-        let formIsValid = false;
-
+        let formIsValid = true;
         if (person.name == '') {
             let nameInputElement = document.getElementById('youtuberName');
             displayValidationResults(nameInputElement);
             formIsValid = false;
         }
-
         if (person.section == '') {
             let nameInputElement = document.getElementById('youtuberSection');
             displayValidationResults(nameInputElement);
-        }
+            formIsValid = false;
 
-        if (person.age < 12 || person.age < 60) {
+        }
+        if (person.age < 12 || person.age > 60) {
             let nameInputElement = document.getElementById('youtuberAge');
             displayValidationResults(nameInputElement);
+            formIsValid = false;
         }
 
+        return formIsValid
     }
 
     function displayValidationResults(input) {
-        let warningSpan = document.createElement('span');
-        warningSpan.className = 'warningSpans';
-        warningSpan.innerHTML = 'This field is required*';
+        input.placeholder = 'This field is required*'
         input.classList.add('invalidInput');
-        input.parentNode.append(warningSpan);
     }
 
-
-
+    $('input').focus(function () {
+        $(this).removeClass('invalidInput');
+        let inputType = $(this).attr('data-inputType');
+        this.placeholder = 'Enter ' + inputType;
+    })
 });
 
 
