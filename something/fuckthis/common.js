@@ -1,9 +1,9 @@
 $(function () {
 
     let data = [
-        { name: 'john', section: 'gaming', age: 25 },
-        { name: 'steve', section: 'stock', age: 35 },
-        { name: 'ash', section: 'real estate', age: 40 }
+        { id: 1, name: 'john', section: 'gaming', age: 25 },
+        { id: 2, name: 'steve', section: 'stock', age: 35 },
+        { id: 3, name: 'ash', section: 'real estate', age: 40 }
     ];
 
     function buildTable() {
@@ -27,21 +27,30 @@ $(function () {
             html += `<td>${data[i].section}</td>`;
             html += `<td>${data[i].age}</td>`;
             html +=
-                `<td><i class="fas fa-user-times" style="cursor:pointer"></i></td>`;
+                `<td><i class="fas fa-user-times deleteButton" style="cursor:pointer"></i></td>`;
 
             html += `</tr><tr>`;
         }
         html += `</tr></table>`;
         $('#tableYoutube')[0].innerHTML = html;
+
+        var allDeleteButtons = document.getElementsByClassName('deleteButton');
+        for (let i = 0; i < allDeleteButtons.length; i++) {
+            allDeleteButtons[i].addEventListener('click', function () {
+                deleteItem(i);
+            });
+        }
     }
 
     buildTable();
 
     $('.controlForm').click(function () {
+        //To Do: problem with event disappearing after DOM manipulation
+        console.log('hide/show form clicked');
         if (!$('#AddingYoutuberForm').is(":visible")) {
             $('#AddingYoutuberForm').show();
-            $('#hideForm').show()
-            $('#showForm').hide()
+            $('#hideForm').show();
+            $('#showForm').hide();
         } else {
             $('#AddingYoutuberForm').hide();
             $('#hideForm').hide()
@@ -56,12 +65,18 @@ $(function () {
         let sectionInput = $(this).serializeArray()[1].value;
         let ageInput = +$(this).serializeArray()[2].value;
 
+        let lastId = 1;
+        data.forEach(el => {
+            if (lastId < el.id) {
+                lastId = el.id
+            }
+        })
 
-        let youtuber = { name: nameInput, section: sectionInput, age: ageInput };
-
+        let youtuber = { id: lastId + 1, name: nameInput, section: sectionInput, age: ageInput };
         if (validateInputs(youtuber)) {
             data.push(youtuber);
-            buildTable(youtuber);
+            console.log(data)
+            buildTable();
             this.reset();
         }
 
@@ -99,6 +114,12 @@ $(function () {
         let inputType = $(this).attr('data-inputType');
         this.placeholder = 'Enter ' + inputType;
     })
+
+
+    function deleteItem(index) {
+        data.splice(index, 1);
+        buildTable();
+    }
 });
 
 
